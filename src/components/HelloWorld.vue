@@ -2,16 +2,16 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="posts"
     class="elevation-1"
   >
     <template v-slot:items="props">
-      <td>{{ props.item.name }}</td>
-      <td class="text-xs-right">{{ props.item.calories }}</td>
-      <td class="text-xs-right">{{ props.item.fat }}</td>
-      <td class="text-xs-right">{{ props.item.carbs }}</td>
-      <td class="text-xs-right">{{ props.item.protein }}</td>
-      <td class="text-xs-right">{{ props.item.iron }}</td>
+      <td>{{ props.item.date }}</td>
+      <td class="text-xs-right">
+        <a :href="props.item.url" target="_blank">{{ props.item.url }}</a></td>
+      <td class="text-xs-right">{{ props.item.type }}</td>
+      <td class="text-xs-right">{{ props.item.slug }}</td>
+      <td class="text-xs-right">{{ props.item.count }}</td>
     </template>
   </v-data-table>
 </template>
@@ -21,99 +21,90 @@
     data () {
       return {
         headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'left',
-            sortable: false,
-            value: 'name'
-          },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' }
+          { text: 'Date', value: 'date' },
+          { text: 'Url', value: 'url' },
+          { text: 'Type', value: 'type' },
+          { text: 'Slug', value: 'slug' },
+          { text: 'Count', value: 'count' }
         ],
-        desserts: [
+        posts: [
           {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: '1%'
+            "url": "https://reblog.kondoumh.com/post/184336135127",
+            "date": "2019-04-21 06:52:45 GMT",
+            "type": "photo",
+            "slug": "基本情報技術者試験受けてくる-和総さんのツイート-基本情報技術者試験受けてくる-から",
+            "count": 228
           },
           {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1%'
+            "url": "https://reblog.kondoumh.com/post/184319291597",
+            "date": "2019-04-20 15:01:19 GMT",
+            "type": "quote",
+            "slug": "2つの事が起きました",
+            "count": 1
           },
           {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: '7%'
+            "url": "https://reblog.kondoumh.com/post/184003539017",
+            "date": "2019-04-07 05:30:32 GMT",
+            "type": "photo",
+            "slug": "食べてたカップ麺のかやく袋よく見たら縦読み入ってる-4wlclimeさんのツイート",
+            "count": 12
           },
           {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8%'
+            "url": "https://reblog.kondoumh.com/post/183604104417",
+            "date": "2019-03-21 08:28:26 GMT",
+            "type": "photo",
+            "slug": "家人に教えて貰いましたが欧米のexcelマナー講師によれば全てのシートでa1セルにカーソル置いて",
+            "count": 5
           },
           {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: '16%'
+            "url": "https://reblog.kondoumh.com/post/183599077742",
+            "date": "2019-03-21 02:33:54 GMT",
+            "type": "quote",
+            "slug": "bill",
+            "count": 16
           },
           {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0%'
+            "url": "https://reblog.kondoumh.com/post/183507626102",
+            "date": "2019-03-17 02:11:35 GMT",
+            "type": "photo",
+            "slug": "子桃太郎読んで-親昔々あるところに-子もっとスターウォーズっぽく",
+            "count": 2
           },
           {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: '2%'
+            "url": "https://reblog.kondoumh.com/post/183350324742",
+            "date": "2019-03-10 05:21:53 GMT",
+            "type": "photo",
+            "slug": "おおおおおおこうしてみるとgoogle翻訳が進化してるぅぅぅぅ",
+            "count": 1
           },
           {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: '45%'
+            "url": "https://reblog.kondoumh.com/post/182862550052",
+            "date": "2019-02-17 06:22:41 GMT",
+            "type": "quote",
+            "slug": "オレ-オマエ-ゲンシジンスル-プログラム-カイタ-ゲンシジン-ジョシ-ツカワナイ-ゲンゴショリ-スル",
+            "count": 5
           },
           {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: '22%'
+            "url": "https://reblog.kondoumh.com/post/182859251837",
+            "date": "2019-02-17 02:57:07 GMT",
+            "type": "quote",
+            "slug": "ソフトウェア業界はpcと電気代があれば開発ができるという意味ではかなり金が掛からない業界であり際限",
+            "count": 44
           },
           {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6%'
-          }
+            "url": "https://reblog.kondoumh.com/post/182574685722",
+            "date": "2019-02-05 08:19:27 GMT",
+            "type": "quote",
+            "slug": "契約書って何で甲と乙と丙なんですかね無駄に難しく感じるので俺とお前と大五郎くらいにできないものだろ",
+            "count": 1
+          },
+          {
+            "url": "https://reblog.kondoumh.com/post/182519192757",
+            "date": "2019-02-03 07:38:13 GMT",
+            "type": "quote",
+            "slug": "パソコンにデータ突っ込んで特徴みつけるのがmachine-learning-machine",
+            "count": 15
+          },
         ]
       }
     }
