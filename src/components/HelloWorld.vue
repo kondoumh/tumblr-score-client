@@ -22,9 +22,9 @@
       return {
         headers: [
           { text: 'Date', value: 'date' },
-          { text: 'Url', value: 'url' },
+          { text: 'Url', value: 'url', sortable: false },
           { text: 'Type', value: 'type' },
-          { text: 'Slug', value: 'slug' },
+          { text: 'Slug', value: 'slug', sortable: false },
           { text: 'Count', value: 'count' }
         ],
         posts: [
