@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/dfa94edd-35c6-45cd-98bb-4e2b255d5eab/deploy-status)](https://app.netlify.com/sites/angry-wozniak-fd46fa/deploys)
+
 # tumblr-score-client
 
 ## Project setup
