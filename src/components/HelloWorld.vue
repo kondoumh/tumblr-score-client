@@ -3,6 +3,7 @@
   <v-data-table
     :headers="headers"
     :items="posts"
+    :pagination.sync="pagination"
     class="elevation-1"
   >
     <template v-slot:items="props">
@@ -37,7 +38,11 @@
         { text: 'Slug', value: 'slug', sortable: false },
         { text: 'Type', value: 'type' },
         { text: 'Count', value: 'count' }
-      ]
+      ],
+      pagination: {
+        sortBy: 'date',
+        descending: true
+      }
     })
   }
 </script>
