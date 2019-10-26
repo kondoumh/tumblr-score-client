@@ -3,7 +3,8 @@
   <v-data-table
     :headers="headers"
     :items="posts"
-    :pagination.sync="pagination"
+    :page.sync="page"
+    :items-per-page="itemsPerPage"
     class="elevation-1"
   >
     <template v-slot:items="props">
@@ -33,6 +34,9 @@
     },
     data: () => ({
       posts: [],
+      page: 1,
+      pageCount: 0,
+      itemsPerPage: 10,
       headers: [
         { text: 'Date', value: 'date' },
         { text: 'Slug', value: 'slug', sortable: false },
