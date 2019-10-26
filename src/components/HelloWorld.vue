@@ -3,15 +3,17 @@
   <v-data-table
     :headers="headers"
     :items="posts"
-    :pagination.sync="pagination"
+    :items-per-page="itemsPerPage"
+    :footer-props="{
+      'items-per-page-options': [5, 10, 15, 20, 25, 30]
+    }"
     class="elevation-1"
   >
-    <template v-slot:items="props">
-      <td>{{ props.item.date.substring(0, 19) }}</td>
-      <td class="text-xs-left">
-        <a :href="props.item.url" target="_blank">{{ props.item.slug ? props.item.slug : props.item.url }}</a></td>
-      <td class="text-xs-right">{{ props.item.type }}</td>
-      <td class="text-xs-right">{{ props.item.count }}</td>
+    <template v-slot:item.date="{ item }">
+      {{ item.date.substring(0, 19) }}
+    </template>
+    <template v-slot:item.slug="{ item }">
+      <a :href="item.url" target="_blank">{{ item.slug ? item.slug : item.url }}</a>
     </template>
   </v-data-table>
 </template>
@@ -33,16 +35,13 @@
     },
     data: () => ({
       posts: [],
+      itemsPerPage: 5,
       headers: [
         { text: 'Date', value: 'date' },
         { text: 'Slug', value: 'slug', sortable: false },
         { text: 'Type', value: 'type' },
         { text: 'Count', value: 'count' }
       ],
-      pagination: {
-        sortBy: 'date',
-        descending: true
-      }
     })
   }
 </script>

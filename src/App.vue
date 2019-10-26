@@ -1,10 +1,10 @@
 <template>
   <v-app>
-    <v-toolbar app>
+    <v-app-bar app>
       <v-toolbar-title class="headline text-uppercase">
         <span>Tumblr score</span>
       </v-toolbar-title>
-    </v-toolbar>
+    </v-app-bar>
 
     <v-content>
       <HelloWorld/>
