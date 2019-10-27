@@ -8,6 +8,6 @@ export default new Vuetify({
     iconfont: 'mdi',
   },
   theme: {
-    dark: true
+    dark: window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches
   }
 })
