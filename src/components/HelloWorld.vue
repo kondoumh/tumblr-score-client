@@ -1,41 +1,32 @@
 
 <template>
-  <v-card>
-    <v-card-title>
-      <v-text-field
-        v-model="search"
-        append-icon="search"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field>
-    </v-card-title>
-    <v-data-table
-      :headers="headers"
-      :items="posts"
-      :search="search"
-      :items-per-page="itemsPerPage"
-      :footer-props="{
-        'items-per-page-options': [5, 10, 15, 20, 25, 30]
-      }"
-      class="elevation-1"
-    >
-      <template v-slot:item.date="{ item }">
-        {{ item.date.substring(0, 19) }}
-      </template>
-      <template v-slot:item.slug="{ item }">
-        <a :href="item.url" target="_blank">{{ item.slug ? item.slug : item.url }}</a>
-      </template>
-      <template v-slot:body.append>
-        <tr>
-          <td colspan="3"></td>
-          <td>
-            <v-text-field v-model="count" type="number" label="More than"></v-text-field>
-          </td>
-        </tr>
-      </template>
-    </v-data-table>
-  </v-card>
+  <v-data-table
+    :headers="headers"
+    :items="posts"
+    :items-per-page="itemsPerPage"
+    :footer-props="{
+      'items-per-page-options': [5, 10, 15, 20, 25, 30]
+    }"
+    class="elevation-1"
+  >
+    <template v-slot:item.date="{ item }">
+      {{ item.date.substring(0, 19) }}
+    </template>
+    <template v-slot:item.slug="{ item }">
+      <a :href="item.url" target="_blank">{{ item.slug ? item.slug : item.url }}</a>
+    </template>
+    <template v-slot:body.append>
+      <tr>
+        <td colspan="2"></td>
+        <td>
+          <v-select v-model="type" :items="types" label="type"></v-select>
+        </td>
+        <td>
+          <v-text-field v-model="count" type="number" label="More than"></v-text-field>
+        </td>
+      </tr>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
@@ -55,8 +46,15 @@
       headers() {
         return [
           { text: 'Date', value: 'date', filterable: false },
-          { text: 'Slug', value: 'slug', sortable: false, filterable: false },
-          { text: 'Type', value: 'type' },
+          { text: 'Slug', value: 'slug', sortable: false },
+          {
+            text: 'Type',
+            value: 'type',
+            filter: value => {
+              if (!this.type) return true
+              return this.type.startsWith(value)
+            }
+          },
           {
             text: 'Count',
             value: 'count',
@@ -70,7 +68,8 @@
     },
     data: () => ({
       posts: [],
-      search: "",
+      types: ["", "quote", "photo", "text", "link"],
+      type: "",
       count: "",
       itemsPerPage: 5,
     })
