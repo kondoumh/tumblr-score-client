@@ -2,6 +2,8 @@
 
 # tumblr-score-client
 
+Show score of tumblr posts (count of liked or rebloged).
+
 ## Project setup
 ```
 npm install
