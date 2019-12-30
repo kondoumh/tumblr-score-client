@@ -42,7 +42,7 @@
       }
     },
     computed: {
-      url: () => 'https://compassionate-thompson-b0de67.netlify.com/tumblr-score.json',
+      url: () => 'https://tumblr-score-kondoumh.netlify.com/tumblr-score.json',
       headers() {
         return [
           { text: 'Date', value: 'date', filterable: false },
