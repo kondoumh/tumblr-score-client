@@ -17,11 +17,8 @@
     </template>
     <template v-slot:body.append>
       <tr>
-        <td colspan="2"></td>
         <td>
           <v-select v-model="type" :items="types" label="type"></v-select>
-        </td>
-        <td>
           <v-text-field v-model="count" type="number" label="More than"></v-text-field>
         </td>
       </tr>
