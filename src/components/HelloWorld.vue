@@ -34,7 +34,7 @@
     methods: {
       async fetchData () {
         const res = await fetch(this.url, {
-          mode: 'cors'
+          mode: 'no-cors'
         })
         const json = await res.json()
         this.posts = json
