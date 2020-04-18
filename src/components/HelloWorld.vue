@@ -34,7 +34,12 @@
     methods: {
       async fetchData () {
         const res = await fetch(this.url, {
-          mode: 'cors'
+          method: 'GET',
+          mode: 'cors',
+          headers: {
+            'Content-Type': 'application/json; charset=utf-8',
+            'X-Custom-Header': 'custom-header'
+          },
         })
         const json = await res.json()
         this.posts = json
