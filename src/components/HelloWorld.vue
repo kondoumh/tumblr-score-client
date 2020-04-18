@@ -34,19 +34,14 @@
     methods: {
       async fetchData () {
         const res = await fetch(this.url, {
-          method: 'GET',
           mode: 'cors',
-          headers: {
-            'Content-Type': 'application/json; charset=utf-8',
-            'X-Custom-Header': 'custom-header'
-          },
         })
         const json = await res.json()
         this.posts = json
       }
     },
     computed: {
-      url: () => 'https://tumblr-score-kondoumh.netlify.com/tumblr-score.json',
+      url: () => 'https://tumblr-score-kondoumh.netlify.app/tumblr-score.json',
       headers() {
         return [
           { text: 'Date', value: 'date', filterable: false },
