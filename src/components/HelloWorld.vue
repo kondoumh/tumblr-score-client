@@ -13,13 +13,13 @@
       {{ item.date.substring(0, 19) }}
     </template>
     <template v-slot:item.slug="{ item }">
-      <a :href="item.url" target="_blank">{{ item.slug ? item.slug : item.url }}</a>
+      <a :href="item.post_url" target="_blank">{{ item.slug ? item.slug : item.id_string }}</a>
     </template>
     <template v-slot:body.append>
       <tr>
         <td>
           <v-select v-model="type" :items="types" label="type"></v-select>
-          <v-text-field v-model="count" type="number" label="More than"></v-text-field>
+          <v-text-field v-model="note_count" type="number" label="More than"></v-text-field>
         </td>
       </tr>
     </template>
@@ -41,7 +41,7 @@
       }
     },
     computed: {
-      url: () => 'https://tumblr-score-kondoumh.netlify.app/tumblr-score.json',
+      url: () => 'https://tmblrscore-kondoumh.netlify.app/posts.json',
       headers() {
         return [
           { text: 'Date', value: 'date', filterable: false },
@@ -56,10 +56,10 @@
           },
           {
             text: 'Count',
-            value: 'count',
+            value: 'note_count',
             filter: value => {
-              if (!this.count) return true
-              return value > parseInt(this.count)
+              if (!this.note_count) return true
+              return value > parseInt(this.note_count)
             }
           }
         ]
@@ -69,7 +69,7 @@
       posts: [],
       types: ["", "quote", "photo", "text", "link"],
       type: "",
-      count: "",
+      note_count: "",
       itemsPerPage: 5,
     })
   }
