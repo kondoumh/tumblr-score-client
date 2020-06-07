@@ -1,29 +1,43 @@
 
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="posts"
-    :items-per-page="itemsPerPage"
-    :footer-props="{
-      'items-per-page-options': [5, 10, 15, 20, 25, 30]
-    }"
-    class="elevation-1"
-  >
-    <template v-slot:item.date="{ item }">
-      {{ item.date.substring(0, 19) }}
-    </template>
-    <template v-slot:item.slug="{ item }">
-      <a :href="item.post_url" target="_blank">{{ item.slug ? item.slug : item.id_string }}</a>
-    </template>
-    <template v-slot:body.append>
-      <tr>
-        <td>
-          <v-select v-model="type" :items="types" label="type"></v-select>
-          <v-text-field v-model="note_count" type="number" label="More than"></v-text-field>
-        </td>
-      </tr>
-    </template>
-  </v-data-table>
+  <v-card>
+    <v-card-title>
+      reblog.kondoumh.com
+      <v-spacer/>
+      <v-text-field
+        v-model="search"
+        append-icon="mdi-magnify"
+        label="Search"
+        single-line
+        hide-details
+      ></v-text-field> 
+    </v-card-title>
+    <v-data-table
+      :headers="headers"
+      :items="posts"
+      :search="search"
+      :items-per-page="itemsPerPage"
+      :footer-props="{
+        'items-per-page-options': [5, 10, 15, 20, 25, 30]
+      }"
+      class="elevation-1"
+    >
+      <template v-slot:item.date="{ item }">
+        {{ item.date.substring(0, 19) }}
+      </template>
+      <template v-slot:item.slug="{ item }">
+        <a :href="item.post_url" target="_blank">{{ item.slug ? item.slug : item.id_string }}</a>
+      </template>
+      <template v-slot:body.append>
+        <tr>
+          <td>
+            <v-select v-model="type" :items="types" label="type"></v-select>
+            <v-text-field v-model="note_count" type="number" label="More than"></v-text-field>
+          </td>
+        </tr>
+      </template>
+    </v-data-table>
+  </v-card>
 </template>
 
 <script>
@@ -45,7 +59,17 @@
       headers() {
         return [
           { text: 'Date', value: 'date', filterable: false },
-          { text: 'Slug', value: 'slug', sortable: false },
+          {
+            text: 'Slug',
+            value: 'slug',
+            filter: value => {
+              if (!this.search) {
+                return true
+              }
+              return value.toString().indexOf(this.search) !== -1
+            },
+            sortable: false
+          },
           {
             text: 'Type',
             value: 'type',
@@ -67,9 +91,10 @@
     },
     data: () => ({
       posts: [],
-      types: ["", "quote", "photo", "text", "link"],
-      type: "",
-      note_count: "",
+      search: '',
+      types: ['', 'quote', 'photo', 'text', 'link'],
+      type: '',
+      note_count: '',
       itemsPerPage: 5,
     })
   }
