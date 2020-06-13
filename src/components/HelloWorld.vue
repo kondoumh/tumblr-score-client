@@ -26,7 +26,7 @@
         {{ item.date.substring(0, 19) }}
       </template>
       <template v-slot:item.slug="{ item }">
-        <a :href="item.post_url" target="_blank">{{ item.slug ? item.slug : item.id_string }}</a>
+        <a :href="item.post_url" target="_blank">{{ item.slug }}</a>
       </template>
       <template v-slot:body.append>
         <tr>
@@ -58,7 +58,7 @@
       url: () => 'https://tmblrscore-kondoumh.netlify.app/posts.json',
       headers() {
         return [
-          { text: 'Date', value: 'date', filterable: false },
+          { text: 'Date', value: 'date', filter: () => true },
           {
             text: 'Slug',
             value: 'slug',
@@ -66,7 +66,7 @@
               if (!this.search) {
                 return true
               }
-              return value.toString().indexOf(this.search) !== -1
+              return value.toString().toLowerCase().indexOf(this.search.toLowerCase()) !== -1
             },
             sortable: false
           },
