@@ -59,17 +59,7 @@
       headers() {
         return [
           { text: 'Date', value: 'date', filter: () => true },
-          {
-            text: 'Slug',
-            value: 'slug',
-            filter: value => {
-              if (!this.search) {
-                return true
-              }
-              return value.toString().toLowerCase().indexOf(this.search.toLowerCase()) !== -1
-            },
-            sortable: false
-          },
+          { text: 'Slug', value: 'slug', sortable: false },
           {
             text: 'Type',
             value: 'type',
