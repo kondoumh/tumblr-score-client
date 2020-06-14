@@ -25,7 +25,7 @@
         {{ item.date.substring(0, 19) }}
       </template>
       <template v-slot:item.slug="{ item }">
-        <a :href="item.post_url" target="_blank">{{ item.slug }}</a>
+        <a :href="item.post_url" target="_blank">{{ item.slug ? item.slug : item.id_string }}</a>
       </template>
     </v-data-table>
   </v-card>
