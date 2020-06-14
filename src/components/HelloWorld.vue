@@ -2,15 +2,14 @@
 <template>
   <v-card>
     <v-card-title>
-      reblog.kondoumh.com
-      <v-spacer/>
-      <v-text-field
-        v-model="search"
-        append-icon="mdi-magnify"
-        label="Search"
-        single-line
-        hide-details
-      ></v-text-field> 
+      reblog.kondoumh.com<v-spacer/>{{ date }}
+    </v-card-title>
+    <v-card-title>
+      <v-select v-model="type" :items="types" label="type" />
+      <v-spacer />
+      <v-text-field v-model="note_count" type="number" label="More than" />
+      <v-spacer />
+      <v-text-field v-model="search" append-icon="mdi-magnify" label="Search" />
     </v-card-title>
     <v-data-table
       :headers="headers"
@@ -28,14 +27,6 @@
       <template v-slot:item.slug="{ item }">
         <a :href="item.post_url" target="_blank">{{ item.slug }}</a>
       </template>
-      <template v-slot:body.append>
-        <tr>
-          <td>
-            <v-select v-model="type" :items="types" label="type"></v-select>
-            <v-text-field v-model="note_count" type="number" label="More than"></v-text-field>
-          </td>
-        </tr>
-      </template>
     </v-data-table>
   </v-card>
 </template>
@@ -47,15 +38,15 @@
     },
     methods: {
       async fetchData () {
-        const res = await fetch(this.url, {
+        const res = await fetch('https://tmblrscore-kondoumh.netlify.app/posts.json', {
           mode: 'cors',
         })
         const json = await res.json()
-        this.posts = json
+        this.posts = json.posts
+        this.date = json.date
       }
     },
     computed: {
-      url: () => 'https://tmblrscore-kondoumh.netlify.app/posts.json',
       headers() {
         return [
           { text: 'Date', value: 'date', filter: () => true },
@@ -81,6 +72,7 @@
     },
     data: () => ({
       posts: [],
+      date: '',
       search: '',
       types: ['', 'quote', 'photo', 'text', 'link'],
       type: '',
