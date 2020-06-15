@@ -2,7 +2,13 @@
 <template>
   <v-card>
     <v-card-title>
-      reblog.kondoumh.com<v-spacer/>{{ date }}
+      reblog.kondoumh.com
+      <v-spacer/>
+      <v-btn icon color="gray" v-on:click="fetchData">
+        <v-icon>mdi-cached</v-icon>
+      </v-btn>
+      <v-spacer/>
+      {{ date }}
     </v-card-title>
     <v-card-title>
       <v-select v-model="type" :items="types" label="type" />
